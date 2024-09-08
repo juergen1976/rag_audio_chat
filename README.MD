@@ -29,6 +29,7 @@ docker run --name postgres -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 -v ./da
 ## AI frameworks
 - Install Whisper
 - Install Ollama
+- Chroma
 
 # Usage
 
@@ -54,3 +55,16 @@ cd backend
 npm install
 node server.js
 ```
+
+## Chroma Vector Database
+```bash
+pip install chromadb
+chroma run --host localhost --port 8000 --path ./rag_audio_vector_database
+
+or
+
+docker run -d --rm --name chromadb -v ./chroma:/chroma/chroma -e IS_PERSISTENT=TRUE -e ANONYMIZED_TELEMETRY=TRUE chromadb/chroma:latest
+```
+
+## Links
+- https://cookbook.chromadb.dev/running/running-chroma/#chroma-cli
