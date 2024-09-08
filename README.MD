@@ -20,12 +20,22 @@ docker run --name postgres -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 -v ./da
 
 # Usage
 
-## Frontend
+## Frontend Dev
 ```bash
 cd web/audio-recorder-app
 npm install
 npm run serve
 ```
+
+## Frontend Prod
+```bash
+cd web/audio-recorder-app
+npm install
+npm run build
+npm install -g serve
+serve -s dist
+```
+
 
 ## Backend
 ```bash

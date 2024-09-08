@@ -4,7 +4,7 @@
 
     <!-- Create Team -->
     <div class="mb-8 space-y-4">
-      <h2 class="text-2xl font-bold mb-4 text-white">Neues Teasm anlegen</h2>
+      <h2 class="text-2xl font-bold mb-4 text-white">Neues Team anlegen</h2>
       <div>
         <input
           v-model="newTeamName"
@@ -16,15 +16,15 @@
         @click="createTeam"
         class="px-4 py-2 bg-primary text-white rounded-md shadow hover:bg-red-700"
       >
-        Create Team
+        Team anlegen
       </button>
     </div>
 
     <!-- Create Topic -->
     <div class="mb-8 space-y-4">
-      <h2 class="text-2xl font-bold mb-4 text-white">Create a New Topic</h2>
+      <h2 class="text-2xl font-bold mb-4 text-white">Neues Thema anlegen</h2>
       <div>
-        <label class="block text-lg font-semibold mb-2 text-white">Choose a team:</label>
+        <label class="block text-lg font-semibold mb-2 text-white">Team auswählen:</label>
         <select
           v-model="selectedTeam"
           class="block w-full p-2 border border-gray-500 bg-dark-light text-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
@@ -35,7 +35,7 @@
       <div>
         <input
             v-model="newTopicName"
-            placeholder="Topic Name"
+            placeholder="Thema"
             class="block w-full p-2 border border-gray-500 bg-dark-light text-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
         />
       </div>
@@ -43,18 +43,18 @@
           @click="createTopic"
           class="px-4 py-2 bg-primary text-white rounded-md shadow hover:bg-red-700"
       >
-        Create Topic
+        Thema anlegen
       </button>
     </div>
 
     <!-- Teams and Topics Table -->
     <div>
-      <h2 class="text-2xl font-bold mb-4 text-primary">Teams and Topics</h2>
+      <h2 class="text-2xl font-bold mb-4 text-primary">Teams und Themen</h2>
       <table class="min-w-full bg-dark-light rounded-md shadow-md text-white">
         <thead>
         <tr class="bg-dark text-left text-sm uppercase font-semibold text-gray">
           <th class="px-4 py-2 border-b border-gray-500">Team</th>
-          <th class="px-4 py-2 border-b border-gray-500">Topics</th>
+          <th class="px-4 py-2 border-b border-gray-500">Thema</th>
         </tr>
         </thead>
         <tbody>
