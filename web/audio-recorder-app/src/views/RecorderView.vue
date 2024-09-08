@@ -84,7 +84,7 @@
             <td class="px-4 py-2 border-b border-gray-500">{{ recording.topic }}</td>
              <td class="px-4 py-2 border-b border-gray-500">
                   <a
-                    :href="`http://localhost:3005/recordings/${recording.name}`"
+                    :href="`http://localhost:3005/recordings/file/${recording.id}`"
                     class="text-primary hover:underline"
                     download
                   >

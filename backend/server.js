@@ -99,7 +99,7 @@ app.post('/recordings', upload.single('audio'), async (req, res) => {
 app.get('/recordings/:teamId', async (req, res) => {
   const teamId = req.params.teamId;
   const result = await pool.query(
-    `SELECT recordings.name, topics.name AS topic 
+    `SELECT recordings.id, recordings.name, topics.name AS topic 
      FROM recordings 
      JOIN topics ON recordings.topic_id = topics.id 
      WHERE recordings.team_id = $1`,
@@ -212,14 +212,31 @@ app.get('/uploads/:filename', (req, res) => {
 });
 
 // Endpoint to download the recording
-app.get('/recordings/:filename', (req, res) => {
-  const filePath = path.join(__dirname, 'recordings', req.params.filename); // Adjust path to your recordings folder
-  res.download(filePath, err => {
-    if (err) {
-      console.error('Error sending file:', err);
-      res.status(500).send('Error downloading file');
-    }
-  });
+app.get('/recordings/file/:id', (req, res) => {
+
+  // Load recording from the database
+    pool.query('SELECT * FROM recordings WHERE id = $1', [req.params.id], (err, result) => {
+        if (err) {
+        console.error('Error fetching recording:', err);
+        return res.status(500).send('Error fetching recording');
+        }
+
+        if (result.rows.length === 0) {
+        return res.status(404).send('Recording not found');
+        }
+
+        const recording = result.rows[0];
+        const filePath = recording.file_path;
+        console.log('File path:', filePath);
+
+        res.download(filePath, err => {
+        if (err) {
+            console.error('Error sending file:', err);
+            res.status(500).send('Error downloading file');
+        }
+        });
+    });
+
 });
 
 app.listen(3005, () => {
