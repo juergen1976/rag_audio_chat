@@ -3,7 +3,7 @@
     <header class="bg-dark-light p-4 shadow-lg">
       <nav class="container mx-auto flex justify-between items-center">
         <div>
-          <router-link to="/" class="text-primary text-2xl font-bold hover:text-red-700">Alexander Bürkle AudioGPT</router-link>
+          <router-link to="/" class="text-primary text-2xl font-bold hover:text-red-700">Your company AudioGPT</router-link>
         </div>
         <div>
           <router-link to="/" class="text-gray mx-4 hover:text-white">Recorder</router-link>
@@ -40,7 +40,7 @@
       <router-view></router-view>
     </main>
     <footer class="bg-dark-light p-4 text-center text-gray">
-      © 2024 AudioGPT von Alexander Bürkle
+      © 2024 AudioGPT von YourCompany
     </footer>
   </div>
 </template>
