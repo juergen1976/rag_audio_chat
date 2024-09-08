@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "90b03b78-207d-4350-9710-90c1e013d59c",
+		"name": "AudioRAG",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8162830"
+	},
+	"item": [
+		{
+			"name": "teams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3005/teams",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"teams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "recordingsDownload",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3005/recordings/file/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"recordings",
+						"file",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "topicsForTeam",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3005/teams",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"teams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Team",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
