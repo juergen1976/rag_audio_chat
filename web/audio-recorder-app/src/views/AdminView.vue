@@ -1,10 +1,10 @@
 <template>
   <div class="container mx-auto py-8 px-4 bg-dark text-gray">
-    <h1 class="text-3xl font-bold mb-6 text-primary">Admin Page</h1>
+    <h1 class="text-3xl font-bold mb-6 text-primary">Administration</h1>
 
     <!-- Create Team -->
     <div class="mb-8 space-y-4">
-      <h2 class="text-2xl font-bold mb-4 text-white">Create a New Team</h2>
+      <h2 class="text-2xl font-bold mb-4 text-white">Neues Teasm anlegen</h2>
       <div>
         <input
           v-model="newTeamName"
