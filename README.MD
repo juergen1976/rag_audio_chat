@@ -66,5 +66,10 @@ or
 docker run -d --rm --name chromadb -v ./chroma:/chroma/chroma -e IS_PERSISTENT=TRUE -e ANONYMIZED_TELEMETRY=TRUE chromadb/chroma:latest
 ```
 
+## Backup recommendations
+- Backup the Postgres database volume
+- Backup the Chroma database volume
+- Backup of the uploaded audio files
+
 ## Links
 - https://cookbook.chromadb.dev/running/running-chroma/#chroma-cli
