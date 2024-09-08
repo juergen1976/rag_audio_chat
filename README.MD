@@ -24,6 +24,11 @@ docker run --name postgres -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 -v ./da
 ```
 ## Web
 - Install Node.js
+- Install Streamlit
+
+## AI frameworks
+- Install Whisper
+- Install Ollama
 
 # Usage
 
