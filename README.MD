@@ -1,3 +1,7 @@
+# Audio GPT
+
+![Alt text](./web/audio-recorder-app/src/assets/ai_bot.jpg)
+
 # Idea
 * Recording voice with Vud.js app and save the audio file to the server.
 
@@ -15,12 +19,17 @@ docker run --name postgres -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 -v ./da
 ```
 
 # Usage
+
+## Frontend
+```bash
+cd web/audio-recorder-app
+npm install
+npm run serve
+```
+
 ## Backend
 ```bash
 cd backend
 npm install
 node server.js
 ```
-
-# Links
-- https://www.baeldung.com/ops/postgresql-docker-setup
