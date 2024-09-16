@@ -61,10 +61,6 @@ def audiorec_demo_app():
         st.write("Transcription:")
         st.write(result["text"])
 
-
-
-
-
 if __name__ == '__main__':
     # call main function
     audiorec_demo_app()
