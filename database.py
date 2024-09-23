@@ -47,7 +47,7 @@ class AudioChatDatabase():
         if conn is None:
             return None
         cur = conn.cursor()
-        cur.execute("UPDATE recordings SET transcribed = true WHERE id = %s", (recording_id,))
+        cur.execute("UPDATE recordings SET is_transcribed = true WHERE id = %s", (recording_id,))
         conn.commit()
         return True
 

@@ -2,6 +2,7 @@
 import chromadb
 import psycopg2
 import whisper
+from babel.numbers import get_currency_name
 from langchain_community.embeddings import OllamaEmbeddings
 from langchain_chroma import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -14,9 +15,6 @@ class AudioIndexer:
         self.embeddings = OllamaEmbeddings(model="llama3")
         self.text_splitter = RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=100)
         self.audio_database = AudioChatDatabase()
-
-    def get_text_from_whisper(self, audio_file_path: str) -> str:
-        model = whisper.load_model("medium")
 
     def get_text_from_whisper(self, audio_file_path: str) -> str:
         model = whisper.load_model("medium")
@@ -39,6 +37,10 @@ class AudioIndexer:
         chunks = self.text_splitter.split_documents([document])
         vector_store.add_documents(chunks)
 
+    def get_collection_name(self, team_name, topic) -> str:
+        return f"{team_name[0:2]}_{topic}"
+
+
 if __name__ == "__main__":
     audio_indexer = AudioIndexer()
     # 1. Get from the Postgres database all teams and topics
@@ -59,7 +61,7 @@ if __name__ == "__main__":
                 text = audio_indexer.get_text_from_whisper(audio_file_path)
                 print("Transcribed text: ", text)
                 # Store the transcribed text in the Chroma vector database
-                audio_indexer.store_recording_in_chroma(collection_name=f"{team_name}_{topic[1]}", recording_text=text, recording_id=recording[0])
+                audio_indexer.store_recording_in_chroma(collection_name=f"{audio_indexer.get_collection_name(team_name, topic[1])}", recording_text=text, recording_id=recording[0])
                 # mark the recording as transcribed and save it in the database
                 audio_indexer.audio_database.mark_recording_as_transcribed(recording[0])
                 audio_indexer.audio_database.set_transcribed_text(recording[0], text)
