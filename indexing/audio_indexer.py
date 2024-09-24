@@ -7,6 +7,8 @@ from langchain_community.embeddings import OllamaEmbeddings
 from langchain_chroma import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
+from chromadb.utils import embedding_functions
+from langchain.embeddings import SentenceTransformerEmbeddings
 
 from AB_AudioChat.database import AudioChatDatabase
 
@@ -23,9 +25,12 @@ class AudioIndexer:
 
     def store_recording_in_chroma(self, collection_name: str, recording_text: str, recording_id: int):
         # https://python.langchain.com/v0.2/docs/integrations/vectorstores/chroma/
+
+
         vector_store = Chroma(
             collection_name=collection_name,
-            embedding_function=self.embeddings,
+            embedding_function=SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2"),
+            #embedding_function=self.embeddings,
             persist_directory="./chroma_langchain_db",  # Where to save data locally, remove if not neccesary
         )
 
