@@ -1,35 +1,22 @@
-import streamlit as st
+import chromadb
 from langchain_community.chat_models import ChatOllama
+from langchain_community.vectorstores import Chroma
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate
-from langchain.embeddings import SentenceTransformerEmbeddings
-from langchain_community.vectorstores import Chroma
 from langchain_core.runnables import RunnablePassthrough
-
+from langchain.embeddings import SentenceTransformerEmbeddings
 from AB_AudioChat.database import AudioChatDatabase
 
-st.image("./ai_bot.jpg", width=400)
 
-st.sidebar.title("AudioGPT Chat")
-
+# 1. Read the teams and topics from the postgres database
 audio_database = AudioChatDatabase()
 teams = audio_database.get_teams()
+print(teams)
 
-
-# Streamlit Selectbox
-selected_team = st.selectbox("Select a team", options=teams, format_func=lambda team: team[1])
-
-# get topics for teams
-topics = audio_database.get_topics_for__team_id(selected_team[0])
-
-selected_topic = st.selectbox("Select a topic", options=topics, format_func=lambda topic: topic[1])
-
-collection_name = f"{selected_team[1][0:2]}_{selected_topic[1]}"
-
-st.write(f"Collection name used for vector search: {collection_name}")
-
-# User prompt in multiple lines
-question = st.text_area("Enter your question", height=100)
+# get all collections
+client = chromadb.PersistentClient(path="../indexing/chroma_langchain_db")
+collections = client.list_collections()
+print(collections)
 
 model = ChatOllama(model="llama3")
 
@@ -50,6 +37,14 @@ vector_store = Chroma(
             persist_directory="../indexing/chroma_langchain_db",  # Where to save data locally, remove if not neccesary
         )
 
+# # test search in vector store
+# # more info: https://python.langchain.com/docs/integrations/vectorstores/chroma/
+# results = vector_store.similarity_search_with_score(
+#     "Ist die Installation sehr einfach zu machen ?", k=3,
+# )
+# for res, score in results:
+#     print(f"* [SIM={score:3f}] {res.page_content} [{res.metadata}]")
+
 retriever = vector_store.as_retriever(
             search_type="similarity_score_threshold",
             search_kwargs={
@@ -62,7 +57,5 @@ chain = ({"context": retriever, "question": RunnablePassthrough()}
                       | model
                       | StrOutputParser())
 
-result = chain.invoke(question)
-
-st.write(result)
-
+result = chain.invoke("Kann man die Installation einfach machen ?")
+print(result)
