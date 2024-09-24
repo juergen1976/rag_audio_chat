@@ -2,3 +2,6 @@ backend/node_modules
 uploads
 data
 dist
+.DS_Store
+__pycache__
+indexing/chroma_langchain_db

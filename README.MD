@@ -66,6 +66,13 @@ or
 docker run -d --rm --name chromadb -v ./chroma:/chroma/chroma -e IS_PERSISTENT=TRUE -e ANONYMIZED_TELEMETRY=TRUE chromadb/chroma:latest
 ```
 
+## RAG Client using AudioGPT
+![Alt text](./app_screenshot.jpg)
+- Implemented with streamlit
+- Use Chroma for RAG
+
+
+
 ## Backup recommendations
 - Backup the Postgres database volume
 - Backup the Chroma database volume

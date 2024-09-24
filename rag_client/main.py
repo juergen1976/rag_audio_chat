@@ -8,6 +8,9 @@ from langchain_core.runnables import RunnablePassthrough
 
 from AB_AudioChat.database import AudioChatDatabase
 
+# set page title
+st.set_page_config(page_title="AudioGPT Chat", page_icon="🎤", layout="wide")
+
 st.image("./ai_bot.jpg", width=400)
 
 st.sidebar.title("AudioGPT Chat")
@@ -31,38 +34,41 @@ st.write(f"Collection name used for vector search: {collection_name}")
 # User prompt in multiple lines
 question = st.text_area("Enter your question", height=100)
 
-model = ChatOllama(model="llama3")
+# submit button
+if st.button("Ask"):
 
-prompt = PromptTemplate.from_template(
-            """
-            <s> [INST]Beantworte die Frage im Kontext. Wenn der Kontext die snicht enthält sage du hast keine Informationen dazu.[/INST] </s> 
-            [INST] Question: {question} 
-            Context: {context} 
-            Answer: [/INST]
-            """
-)
+    model = ChatOllama(model="llama3")
 
-embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
+    prompt = PromptTemplate.from_template(
+                """
+                <s> [INST]Beantworte die Frage im Kontext. Wenn der Kontext die snicht enthält sage du hast keine Informationen dazu.[/INST] </s> 
+                [INST] Question: {question} 
+                Context: {context} 
+                Answer: [/INST]
+                """
+    )
 
-vector_store = Chroma(
-            collection_name="Da_Jedox",
-            embedding_function=embeddings,
-            persist_directory="../indexing/chroma_langchain_db",  # Where to save data locally, remove if not neccesary
-        )
+    embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
 
-retriever = vector_store.as_retriever(
-            search_type="similarity_score_threshold",
-            search_kwargs={
-                "k": 3,
-                "score_threshold": 0.4,
-            })
+    vector_store = Chroma(
+                collection_name="Da_Jedox",
+                embedding_function=embeddings,
+                persist_directory="../indexing/chroma_langchain_db",  # Where to save data locally, remove if not neccesary
+            )
 
-chain = ({"context": retriever, "question": RunnablePassthrough()}
-                      | prompt
-                      | model
-                      | StrOutputParser())
+    retriever = vector_store.as_retriever(
+                search_type="similarity_score_threshold",
+                search_kwargs={
+                    "k": 3,
+                    "score_threshold": 0.4,
+                })
 
-result = chain.invoke(question)
+    chain = ({"context": retriever, "question": RunnablePassthrough()}
+                          | prompt
+                          | model
+                          | StrOutputParser())
 
-st.write(result)
+    result = chain.invoke(question)
+
+    st.write(result)
 
