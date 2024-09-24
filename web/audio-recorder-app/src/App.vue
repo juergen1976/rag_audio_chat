@@ -30,7 +30,7 @@
 
         <!-- Image Section -->
         <div class="flex justify-center md:justify-start">
-          <img src="./assets/ai_bot.jpg" alt="Placeholder Image" class="rounded-lg shadow-lg">
+          <img src="./assets/ai_bot.jpg" alt="Placeholder Image" class="rounded-lg shadow-lg" width="300">
         </div>
 
       </div>

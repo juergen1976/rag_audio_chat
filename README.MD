@@ -71,7 +71,11 @@ docker run -d --rm --name chromadb -v ./chroma:/chroma/chroma -e IS_PERSISTENT=T
 - Implemented with streamlit
 - Use Chroma for RAG
 
-
+## Audio recording frontend
+![Alt text](./record_app_screenshot.jpg)
+- Implemented with Vue.js
+- Backend with Express
+- Postgres for metadata
 
 ## Backup recommendations
 - Backup the Postgres database volume
