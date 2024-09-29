@@ -15,7 +15,7 @@ from AB_AudioChat.database import AudioChatDatabase
 class AudioIndexer:
     def __init__(self):
         self.embeddings = OllamaEmbeddings(model="llama3")
-        self.text_splitter = RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=100)
+        self.text_splitter = RecursiveCharacterTextSplitter(chunk_size=250, chunk_overlap=50)
         self.audio_database = AudioChatDatabase()
 
     def get_text_from_whisper(self, audio_file_path: str) -> str:
