@@ -73,6 +73,7 @@
             <th class="px-4 py-2 border-b border-gray-500">Recording name</th>
             <th class="px-4 py-2 border-b border-gray-500">Topic</th>
             <th class="px-4 py-2 border-b border-gray-500">Download</th>
+              <th class="px-4 py-2 border-b border-gray-500">Transcription</th>
           </tr>
         </thead>
         <tbody>
@@ -91,6 +92,7 @@
                     Download
                   </a>
             </td>
+             <td class="px-4 py-2 border-b border-gray-500 text-ellipsis text-wrap">{{ recording.transcribed_text }}</td>
           </tr>
         </tbody>
       </table>

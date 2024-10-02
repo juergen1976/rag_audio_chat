@@ -99,7 +99,7 @@ app.post('/recordings', upload.single('audio'), async (req, res) => {
 app.get('/recordings/:teamId', async (req, res) => {
   const teamId = req.params.teamId;
   const result = await pool.query(
-    `SELECT recordings.id, recordings.name, topics.name AS topic 
+    `SELECT recordings.id, recordings.name, recordings.transcribed_text, topics.name AS topic 
      FROM recordings 
      JOIN topics ON recordings.topic_id = topics.id 
      WHERE recordings.team_id = $1`,

@@ -18,7 +18,6 @@ st.sidebar.title("AudioGPT Chat")
 audio_database = AudioChatDatabase()
 teams = audio_database.get_teams()
 
-
 # Streamlit Selectbox
 selected_team = st.selectbox("Select a team", options=teams, format_func=lambda team: team[1])
 
