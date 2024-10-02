@@ -41,7 +41,7 @@ if st.button("Ask"):
 
     prompt = PromptTemplate.from_template(
                 """
-                <s> [INST]Beantworte die Frage im Kontext. Wenn der Kontext die snicht enthält sage du hast keine Informationen dazu.[/INST] </s> 
+                <s> [INST]Answer the question based on the information in the given context. If there is no context, say you don't know the answer.[/INST] </s> 
                 [INST] Question: {question} 
                 Context: {context} 
                 Answer: [/INST]
