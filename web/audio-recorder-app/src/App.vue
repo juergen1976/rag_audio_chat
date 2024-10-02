@@ -18,13 +18,13 @@
 
         <!-- Text Section -->
         <div class="text-right">
-          <h1 class="text-4xl font-bold mb-4">Willkommen bei AudioGPT</h1>
+          <h1 class="text-4xl font-bold mb-4">Welcome at AudioGPT</h1>
           <p class="text-lg">
-            In diesem Portal können Sie Wissen per Mikrofon aufnehmen, so das es in der internen Datenbank als Text abgespeichert wird.
-            Hierzu wird eine interne KI benuzt, die ihre Sprachaufnahme in Text umwandelt.
-            Im Rechenzentrum werden die Aufnahmen der KI zur Verfügung gestellt, so das ihr Team später mittels AlexGPT darauf zugreifen kann und
-            auf dem gespeicherten Wissen Fragen stellen kann.
-            Erstellen Sie für Ihr Team ein neues Team und ein neues Thema und fangen Sie an Wissen zu speichern.
+            In this portal you can record knowledge via microphone so that it is stored in the internal database as text.
+            An internal AI is used for this purpose, which converts your voice recording into text.
+            The recordings are made available to the AI in the data center so that your team can access them later using AudioGPT and ask questions based on the stored knowledge.
+            can ask questions based on the stored knowledge.
+            Create a new team and a new topic for your team and start saving knowledge.
           </p>
         </div>
 

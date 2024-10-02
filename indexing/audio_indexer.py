@@ -26,7 +26,6 @@ class AudioIndexer:
     def store_recording_in_chroma(self, collection_name: str, recording_text: str, recording_id: int):
         # https://python.langchain.com/v0.2/docs/integrations/vectorstores/chroma/
 
-
         vector_store = Chroma(
             collection_name=collection_name,
             embedding_function=SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2"),

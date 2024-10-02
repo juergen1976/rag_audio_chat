@@ -1,11 +1,11 @@
 <template>
   <div class="container mx-auto py-8 px-4 bg-dark text-gray">
-    <h1 class="text-3xl font-bold mb-6 text-primary">Audio Recorder für AudioGPT</h1>
+    <h1 class="text-3xl font-bold mb-6 text-primary">Audio Recorder for AudioGPT</h1>
 
     <!-- Team and Topic selection -->
     <div class="mb-6 space-y-4">
       <div>
-        <label for="team" class="block text-lg font-semibold mb-2 text-white">Wählen Sie ein Team:</label>
+        <label for="team" class="block text-lg font-semibold mb-2 text-white">Select a team:</label>
         <select
           v-model="selectedTeam"
           @change="onTeamChange"
@@ -16,7 +16,7 @@
       </div>
 
       <div v-if="topics.length">
-        <label for="topic" class="block text-lg font-semibold mb-2 text-white">Wählen SIe ein Thema:</label>
+        <label for="topic" class="block text-lg font-semibold mb-2 text-white">Select a topic:</label>
         <select
           v-model="selectedTopic"
           class="block w-full p-2 border border-gray-500 bg-dark-light text-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
@@ -28,7 +28,7 @@
       <div>
         <input
           v-model="recordingName"
-          placeholder="Aufnahmebezeichnung"
+          placeholder="Recording name"
           class="block w-full p-2 border border-gray-500 bg-dark-light text-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
         />
       </div>
@@ -41,14 +41,14 @@
         :disabled="isRecording"
         class="px-4 py-2 bg-primary text-white rounded-md shadow hover:bg-red-700 disabled:opacity-50"
       >
-        Start Aufnahme
+        Start Recording
       </button>
       <button
         @click="stopRecording"
         :disabled="!isRecording"
         class="ml-4 px-4 py-2 bg-red-600 text-white rounded-md shadow hover:bg-red-700 disabled:opacity-50"
       >
-        Stop Aufnahme
+        Stop Recording
       </button>
     </div>
 
@@ -60,24 +60,24 @@
         @click="saveRecording"
         class="px-4 py-2 bg-primary text-white rounded-md shadow hover:bg-red-700"
       >
-        Speichern Aufnahme
+        Save Recording
       </button>
     </div>
 
     <!-- Recordings Table -->
     <div>
-      <h2 class="text-2xl font-bold mb-4 text-primary">Aufnahmen im Team</h2>
+      <h2 class="text-2xl font-bold mb-4 text-primary">Recordings of the Team</h2>
       <table class="min-w-full bg-dark-light rounded-md shadow-md text-white">
         <thead>
           <tr class="bg-dark text-left text-sm uppercase font-semibold text-gray">
-            <th class="px-4 py-2 border-b border-gray-500">Aufnahme</th>
-            <th class="px-4 py-2 border-b border-gray-500">Thema</th>
+            <th class="px-4 py-2 border-b border-gray-500">Recording name</th>
+            <th class="px-4 py-2 border-b border-gray-500">Topic</th>
             <th class="px-4 py-2 border-b border-gray-500">Download</th>
           </tr>
         </thead>
         <tbody>
           <tr v-if="recordings.length === 0">
-            <td class="px-4 py-2 border-b border-gray-500" colspan="3">Keine Aufnahmen in diesem Team verfügbar.</td>
+            <td class="px-4 py-2 border-b border-gray-500" colspan="3">No recordings available for the team.</td>
           </tr>
           <tr v-for="recording in recordings" :key="recording.name" class="text-sm hover:bg-gray-700">
             <td class="px-4 py-2 border-b border-gray-500">{{ recording.name }}</td>
