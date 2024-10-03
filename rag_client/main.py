@@ -1,10 +1,14 @@
 import streamlit as st
+from langchain.retrievers import EnsembleRetriever
 from langchain_community.chat_models import ChatOllama
+from langchain_community.retrievers import BM25Retriever
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate
 from langchain.embeddings import SentenceTransformerEmbeddings
 from langchain_community.vectorstores import Chroma
+from langchain_core.documents import Document
 from langchain_core.runnables import RunnablePassthrough
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from AB_AudioChat.database import AudioChatDatabase
 
@@ -55,14 +59,33 @@ if st.button("Ask"):
                 persist_directory="../indexing/chroma_langchain_db",  # Where to save data locally, remove if not neccesary
             )
 
-    retriever = vector_store.as_retriever(
+    # -----------------------------------------------------------------------------------
+    # Ensemble retriever with BM25 and vector search
+    # -----------------------------------------------------------------------------------
+
+    # Vanilla similarity search retriever
+    retriever_similarity_search = vector_store.as_retriever(
                 search_type="similarity_score_threshold",
                 search_kwargs={
                     "k": 3,
                     "score_threshold": 0.4,
                 })
 
-    chain = ({"context": retriever, "question": RunnablePassthrough()}
+    # BM25 retriever
+    all_texts= audio_database.get_all_transcribed_text_for_team_and_topic(selected_team[0], selected_topic[0])
+    all_texts_as_list = [text[0] for text in all_texts]
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=250, chunk_overlap=50)
+    # create documents
+
+
+    all_documents = [Document(page_content=doc) for doc in all_texts_as_list]
+    chunks = text_splitter.split_documents(all_documents)
+    retriever_BM25 = BM25Retriever.from_documents(chunks, search_kwargs={"k": 4})
+
+    # Ensemble retriever with 40% BM25 and 60% similarity search
+    ensemble_retriever = EnsembleRetriever(retrievers=[retriever_BM25, retriever_similarity_search],
+                                           weights=[0.4, 0.6])
+    chain = ({"context": ensemble_retriever , "question": RunnablePassthrough()}
                           | prompt
                           | model
                           | StrOutputParser())

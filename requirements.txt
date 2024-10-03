@@ -1,3 +1,4 @@
 streamlit
 streamlit-audiorec
 psycopg2-binary
+rank_bm25

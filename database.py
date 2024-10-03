@@ -58,3 +58,12 @@ class AudioChatDatabase():
         cur = conn.cursor()
         cur.execute("UPDATE recordings SET transcribed_text = %s WHERE id = %s", (text, recording_id))
         conn.commit()
+
+    def get_all_transcribed_text_for_team_and_topic(self, team_id: int, topic_id: int):
+        conn = self.connect_to_postgres()
+        if conn is None:
+            return None
+        cur = conn.cursor()
+        cur.execute("SELECT transcribed_text FROM recordings WHERE team_id = %s AND topic_id = %s", (team_id, topic_id))
+        transcribed_texts = cur.fetchall()
+        return transcribed_texts
