@@ -12,12 +12,11 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from AB_AudioChat.database import AudioChatDatabase
 
-# set page title
 st.set_page_config(page_title="AudioGPT Chat", page_icon="🎤", layout="wide")
 
-st.image("./ai_bot.jpg", width=400)
+st.header("AudioGPT Chat")
 
-st.sidebar.title("AudioGPT Chat")
+st.image("./ai_bot.jpg", width=300)
 
 audio_database = AudioChatDatabase()
 teams = audio_database.get_teams()
