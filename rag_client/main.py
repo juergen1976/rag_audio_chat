@@ -53,7 +53,7 @@ if st.button("Ask"):
     embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
 
     vector_store = Chroma(
-                collection_name="Da_Jedox",
+                collection_name=collection_name,
                 embedding_function=embeddings,
                 persist_directory="../indexing/chroma_langchain_db",  # Where to save data locally, remove if not neccesary
             )
